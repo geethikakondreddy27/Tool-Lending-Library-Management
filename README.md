@@ -4,11 +4,7 @@ A full-stack Tool Lending Library Management System developed using the MERN Sta
 
 ---
 
-## Live Demo
 
-
-
----
 
 # Project Information
 
@@ -69,6 +65,24 @@ Staff members can securely access the system to:
 | Staff | Login securely, access dashboard, search inventory and view tool records |
 
 ---
+
+## Default Administrator Account
+
+Use the following administrator account to access the system after importing the provided database or seeding the initial admin user.
+
+| Email | Password |
+|-------|----------|
+| admin@toollibrary.com | Admin@123 |
+
+After logging in as the administrator, you can:
+
+- Register new staff members
+- Manage the tool inventory
+- View dashboard statistics
+- Edit and delete existing tools
+
+> Note: Staff accounts can be created from the **Register Staff** page after logging in as an administrator.
+> **Note:** For the default administrator account credentials, please refer to the `server/scripts/seedAdmin.js` file.
 
 # Core Features
 
