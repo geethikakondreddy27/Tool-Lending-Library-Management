@@ -54,7 +54,8 @@ const RegisterStaffPage = () => {
 
       reset();
     } catch (error) {
-      console.error(error);
+      console.log("Status:", error?.response?.status);
+console.log("Response:", error?.response?.data);
 
       showToast(
         "error",
