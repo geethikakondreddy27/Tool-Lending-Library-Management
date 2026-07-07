@@ -5,7 +5,7 @@ import MainLayout from "../../components/layout/MainLayout";
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
 import Card from "../../components/ui/Card";
-import Toast from "../../components/common/Toast";
+import Toast from "../../components/common/toast";
 
 import { useForm } from "react-hook-form";
 import { registerStaff } from "../../services/authService";

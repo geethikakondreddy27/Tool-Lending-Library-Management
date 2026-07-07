@@ -10,7 +10,7 @@ import {
 import useAuth from "../../hooks/useAuth";
 import ToolTable from "../../components/common/ToolTable";
 import ConfirmationModal from "../../components/common/ConfirmationModal";
-import Toast from "../../components/common/Toast";
+import Toast from "../../components/common/toast";
 
 const ToolsPage = () => {
   const { user } = useAuth();
