@@ -1,0 +1,68 @@
+:root {
+
+  /* ===========================
+     COLORS
+  ============================ */
+
+  --color-primary: #1f2937;
+  --color-primary-hover: #111827;
+
+  --color-background: #f4f6f8;
+  --color-surface: #ffffff;
+
+  --color-text: #111827;
+  --color-text-light: #6b7280;
+
+  --color-border: #d5dce3;
+
+  --color-success: #16a34a;
+  --color-danger: #dc2626;
+
+  /* ===========================
+     TYPOGRAPHY
+  ============================ */
+
+  --font-family:
+    "Segoe UI",
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  --font-sm: 14px;
+  --font-md: 16px;
+  --font-lg: 20px;
+  --font-xl: 28px;
+
+  /* ===========================
+     SPACING
+  ============================ */
+
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+
+  /* ===========================
+     BORDER
+  ============================ */
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+
+  /* ===========================
+     SHADOW
+  ============================ */
+
+  --shadow-sm:
+    0 2px 8px rgba(0,0,0,.05);
+
+  --shadow-md:
+    0 6px 18px rgba(0,0,0,.08);
+
+  /* ===========================
+     TRANSITION
+  ============================ */
+
+  --transition: .25s ease;
+}

@@ -1,0 +1,41 @@
+.modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:999;
+}
+
+.confirmation-modal{
+
+    width:420px;
+    max-width:90%;
+
+    background:#fff;
+
+    padding:28px;
+
+    border-radius:12px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.confirmation-modal h3{
+
+    margin-top:0;
+}
+
+.modal-actions{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:12px;
+
+    margin-top:24px;
+}
