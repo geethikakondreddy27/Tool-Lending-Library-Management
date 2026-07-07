@@ -37,23 +37,15 @@ const DashboardPage = () => {
 
   return (
     <MainLayout>
+      <h2 className="page-title">Dashboard</h2>
 
-      <h2 className="page-title">
-        Dashboard
-      </h2>
-
-      <p className="page-subtitle">
-        Welcome back, {user?.fullName}.
-      </p>
+      <p className="page-subtitle">Welcome back, {user?.fullName}.</p>
 
       {loading ? (
-        <div className="card">
-          Loading dashboard...
-        </div>
+        <div className="card">Loading dashboard...</div>
       ) : (
         <>
           <div className="dashboard-stats">
-
             <div className="card stat-card">
               <h4>Total Tools</h4>
               <h2>{stats.totalTools}</h2>
@@ -75,11 +67,9 @@ const DashboardPage = () => {
                 <h2>{stats.totalStaff}</h2>
               </div>
             )}
-
           </div>
 
           <div className="card">
-
             <h3>Quick Actions</h3>
 
             <p
@@ -97,24 +87,16 @@ const DashboardPage = () => {
                 flexWrap: "wrap",
               }}
             >
-
               <button
                 className="btn btn-primary"
-                onClick={() =>
-                  navigate("/tools")
-                }
+                onClick={() => navigate("/tools")}
               >
                 Open Tool Inventory
               </button>
-
-              
-
             </div>
-
           </div>
         </>
       )}
-
     </MainLayout>
   );
 };

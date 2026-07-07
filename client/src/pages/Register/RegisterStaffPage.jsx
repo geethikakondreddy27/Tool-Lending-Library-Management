@@ -50,20 +50,15 @@ const RegisterStaffPage = () => {
 
       await registerStaff(formData);
 
-      showToast(
-        "success",
-        "Staff account created successfully."
-      );
+      showToast("success", "Staff account created successfully.");
 
       reset();
-
     } catch (error) {
       console.error(error);
 
       showToast(
         "error",
-        error?.response?.data?.message ||
-          "Unable to register staff."
+        error?.response?.data?.message || "Unable to register staff.",
       );
     } finally {
       setLoading(false);
@@ -72,28 +67,16 @@ const RegisterStaffPage = () => {
 
   return (
     <MainLayout>
+      <Toast show={toast.show} type={toast.type} message={toast.message} />
 
-      <Toast
-        show={toast.show}
-        type={toast.type}
-        message={toast.message}
-      />
-
-      <h2 className="page-title">
-        Register Staff
-      </h2>
+      <h2 className="page-title">Register Staff</h2>
 
       <p className="page-subtitle">
         Create a new staff account for the Tool Lending Library.
       </p>
 
       <Card>
-
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          noValidate
-        >
-
+        <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <Input
             id="fullName"
             label="Full Name"
@@ -104,8 +87,7 @@ const RegisterStaffPage = () => {
               required: "Full name is required",
               minLength: {
                 value: 3,
-                message:
-                  "Minimum 3 characters required",
+                message: "Minimum 3 characters required",
               },
             }}
             error={errors.fullName}
@@ -120,10 +102,8 @@ const RegisterStaffPage = () => {
             validation={{
               required: "Email is required",
               pattern: {
-                value:
-                  /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message:
-                  "Enter a valid email address",
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Enter a valid email address",
               },
             }}
             error={errors.email}
@@ -139,23 +119,22 @@ const RegisterStaffPage = () => {
               required: "Password is required",
               minLength: {
                 value: 8,
-                message:
-                  "Minimum 8 characters required",
+                message: "Minimum 8 characters required",
               },
             }}
             error={errors.password}
           />
 
           <div className="password-rules">
-  <strong>Password Requirements</strong>
+            <strong>Password Requirements</strong>
 
-  <ul>
-    <li>✓ Minimum 8 characters</li>
-<li>✓ At least one uppercase letter</li>
-<li>✓ At least one lowercase letter</li>
-<li>✓ At least one number</li>
-  </ul>
-</div>
+            <ul>
+              <li>✓ Minimum 8 characters</li>
+              <li>✓ At least one uppercase letter</li>
+              <li>✓ At least one lowercase letter</li>
+              <li>✓ At least one number</li>
+            </ul>
+          </div>
 
           <div
             style={{
@@ -164,14 +143,8 @@ const RegisterStaffPage = () => {
               marginTop: "20px",
             }}
           >
-
-            <Button
-              type="submit"
-              disabled={loading}
-            >
-              {loading
-                ? "Creating..."
-                : "Register Staff"}
+            <Button type="submit" disabled={loading}>
+              {loading ? "Creating..." : "Register Staff"}
             </Button>
 
             <button
@@ -181,15 +154,11 @@ const RegisterStaffPage = () => {
             >
               Back
             </button>
-
           </div>
-
         </form>
-
       </Card>
-
     </MainLayout>
   );
 };
 
-export default RegisterStaffPage; 
+export default RegisterStaffPage;

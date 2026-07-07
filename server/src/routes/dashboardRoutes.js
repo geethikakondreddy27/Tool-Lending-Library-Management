@@ -1,16 +1,10 @@
 const express = require("express");
 
-const {
-  getDashboardStats,
-} = require("../controllers/dashboardController");
+const { getDashboardStats } = require("../controllers/dashboardController");
 
-const {
-  protect,
-} = require("../middlewares/authMiddleware");
+const { protect } = require("../middlewares/authMiddleware");
 
-const {
-  authorize,
-} = require("../middlewares/roleMiddleware");
+const { authorize } = require("../middlewares/roleMiddleware");
 
 const router = express.Router();
 
@@ -21,11 +15,6 @@ const router = express.Router();
  */
 
 // Dashboard Statistics
-router.get(
-  "/stats",
-  protect,
-  authorize("admin", "staff"),
-  getDashboardStats
-);
+router.get("/stats", protect, authorize("admin", "staff"), getDashboardStats);
 
 module.exports = router;

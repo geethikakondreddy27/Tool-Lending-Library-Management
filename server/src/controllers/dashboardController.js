@@ -23,12 +23,9 @@ const getDashboardStats = asyncHandler(async (req, res) => {
     status: "Maintenance",
   });
 
-  const totalCategories = await Tool.distinct(
-    "category",
-    {
-      isActive: true,
-    }
-  );
+  const totalCategories = await Tool.distinct("category", {
+    isActive: true,
+  });
 
   const totalStaff = await User.countDocuments({
     role: "staff",

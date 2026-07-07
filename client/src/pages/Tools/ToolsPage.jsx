@@ -28,16 +28,14 @@ const ToolsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const [toast,setToast]=useState({
-  show:false,
-  type:"success",
-  message:"",
-});
+  const [toast, setToast] = useState({
+    show: false,
+    type: "success",
+    message: "",
+  });
 
-const [showDeleteModal, setShowDeleteModal] = useState(false);
-const [selectedToolId, setSelectedToolId] = useState(null);
-
-
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedToolId, setSelectedToolId] = useState(null);
 
   useEffect(() => {
     fetchTools(1, "");
@@ -75,189 +73,143 @@ const [selectedToolId, setSelectedToolId] = useState(null);
   };
 
   const showToast = (type, message) => {
-  setToast({
-    show: true,
-    type,
-    message,
-  });
-
-  setTimeout(() => {
     setToast({
-      show: false,
-      type: "success",
-      message: "",
+      show: true,
+      type,
+      message,
     });
-  }, 3000);
-};
+
+    setTimeout(() => {
+      setToast({
+        show: false,
+        type: "success",
+        message: "",
+      });
+    }, 3000);
+  };
 
   const handleCreateTool = async (toolData) => {
-  try {
-    setSaving(true);
+    try {
+      setSaving(true);
 
-    await createTool(toolData);
+      await createTool(toolData);
 
-    showToast(
-  "success",
-  "Tool created successfully."
-);
-    setShowForm(false);
+      showToast("success", "Tool created successfully.");
+      setShowForm(false);
 
-    fetchTools(currentPage, search);
+      fetchTools(currentPage, search);
+    } catch (err) {
+      console.error(err);
 
-  } catch (err) {
-    console.error(err);
-
-   showToast(
-  "error",
-  err?.response?.data?.message ||
-  "Unable to create tool."
-);;
-
-  } finally {
-    setSaving(false);
-  }
-};
+      showToast(
+        "error",
+        err?.response?.data?.message || "Unable to create tool.",
+      );
+    } finally {
+      setSaving(false);
+    }
+  };
 
   const handleEditTool = (tool) => {
-  setEditingTool(tool);
-  setShowForm(true);
-};
+    setEditingTool(tool);
+    setShowForm(true);
+  };
 
-const handleUpdateTool = async (toolData) => {
-  try {
-    setSaving(true);
+  const handleUpdateTool = async (toolData) => {
+    try {
+      setSaving(true);
 
-    await updateTool(editingTool._id, toolData);
+      await updateTool(editingTool._id, toolData);
 
-showToast(
-  "success",
-  "Tool updated successfully."
-);
+      showToast("success", "Tool updated successfully.");
 
-setEditingTool(null);
-setShowForm(false);
+      setEditingTool(null);
+      setShowForm(false);
 
-fetchTools(currentPage, search);
-  } catch (err) {
-    console.error(err);
+      fetchTools(currentPage, search);
+    } catch (err) {
+      console.error(err);
 
-   showToast(
-  "error",
-  err?.response?.data?.message ||
-  "Unable to update tool."
-);
-  } finally {
-    setSaving(false);
-  }
-};
+      showToast(
+        "error",
+        err?.response?.data?.message || "Unable to update tool.",
+      );
+    } finally {
+      setSaving(false);
+    }
+  };
 
-const handleDeleteTool = (toolId) => {
-  setSelectedToolId(toolId);
-  setShowDeleteModal(true);
-};
+  const handleDeleteTool = (toolId) => {
+    setSelectedToolId(toolId);
+    setShowDeleteModal(true);
+  };
 
-const confirmDeleteTool = async () => {
-  try {
-    await deleteTool(selectedToolId);
+  const confirmDeleteTool = async () => {
+    try {
+      await deleteTool(selectedToolId);
 
-    showToast(
-  "success",
-  "Tool deleted successfully."
-);
+      showToast("success", "Tool deleted successfully.");
 
-    fetchTools(currentPage, search);
+      fetchTools(currentPage, search);
+    } catch (err) {
+      console.error(err);
 
-  } catch (err) {
-    console.error(err);
-
-    showToast(
-  "error",
-  err?.response?.data?.message ||
-  "Unable to delete tool."
-);
-
-  } finally {
-
-    setShowDeleteModal(false);
-    setSelectedToolId(null);
-
-    
-  }
-};
+      showToast(
+        "error",
+        err?.response?.data?.message || "Unable to delete tool.",
+      );
+    } finally {
+      setShowDeleteModal(false);
+      setSelectedToolId(null);
+    }
+  };
 
   return (
-   
-  <MainLayout>
+    <MainLayout>
+      <Toast show={toast.show} type={toast.type} message={toast.message} />
 
-    <Toast
-    show={toast.show}
-    type={toast.type}
-    message={toast.message}
-/>
+      <h2 className="page-title">Tool Inventory</h2>
 
-    <h2 className="page-title">Tool Inventory</h2>
-
-    <p className="page-subtitle">
-      Manage all tools available in the inventory.
-    </p>
+      <p className="page-subtitle">
+        Manage all tools available in the inventory.
+      </p>
 
       {user?.role === "admin" && (
         <div className="card">
-
           {!showForm ? (
-
             <button
               className="btn btn-primary"
               onClick={() => setShowForm(true)}
             >
               + Add Tool
             </button>
-
           ) : (
-
             <>
               <ToolForm
-  initialValues={editingTool || undefined}
-  isEdit={Boolean(editingTool)}
-  loading={saving}
-  onSubmit={
-    editingTool
-      ? handleUpdateTool
-      : handleCreateTool
-  }
-  onCancel={() => {
-    setEditingTool(null);
-    setShowForm(false);
-  }}
-/>
-              
+                initialValues={editingTool || undefined}
+                isEdit={Boolean(editingTool)}
+                loading={saving}
+                onSubmit={editingTool ? handleUpdateTool : handleCreateTool}
+                onCancel={() => {
+                  setEditingTool(null);
+                  setShowForm(false);
+                }}
+              />
             </>
-
           )}
-
         </div>
       )}
 
       <div className="card">
-
-        <form
-          className="search-form"
-          onSubmit={handleSearch}
-        >
-
+        <form className="search-form" onSubmit={handleSearch}>
           <input
             className="form-input"
             placeholder="Search by tool name or category..."
             value={search}
-            onChange={(e) =>
-              setSearch(e.target.value)
-            }
+            onChange={(e) => setSearch(e.target.value)}
           />
 
-          <button
-            type="submit"
-            className="btn btn-primary"
-          >
+          <button type="submit" className="btn btn-primary">
             Search
           </button>
 
@@ -268,116 +220,83 @@ const confirmDeleteTool = async () => {
           >
             Clear
           </button>
-
         </form>
-
       </div>
 
-      {loading && (
+      {loading && <div className="card">Loading tools...</div>}
+
+      {!loading && error && <div className="card">{error}</div>}
+
+      {!loading && !error && tools.length === 0 && (
         <div className="card">
-          Loading tools...
+          <h3>No Tools Found</h3>
+
+          <p>No tools matched your search.</p>
         </div>
       )}
 
-      {!loading && error && (
+      {!loading && !error && tools.length > 0 && (
         <div className="card">
-          {error}
-        </div>
-      )}
-
-      {!loading &&
-        !error &&
-        tools.length === 0 && (
-
-          <div className="card">
-
-            <h3>No Tools Found</h3>
-
-            <p>
-              No tools matched your search.
-            </p>
-
+          <div className="table-container">
+            <ToolTable
+              tools={tools}
+              onEdit={handleEditTool}
+              onDelete={handleDeleteTool}
+            />
           </div>
 
-      )}
-
-      {!loading &&
-        !error &&
-        tools.length > 0 && (
-
-          <div className="card">
-
-          <div className="table-container">
-
-<ToolTable
-  tools={tools}
-  onEdit={handleEditTool}
-  onDelete={handleDeleteTool}
-/>
-
-</div>
-
-            {totalPages > 1 && (
-
-              <div
-                style={{
-                  marginTop: "20px",
-                  display: "flex",
-                  justifyContent: "center",
-                  gap: "10px",
+          {totalPages > 1 && (
+            <div
+              style={{
+                marginTop: "20px",
+                display: "flex",
+                justifyContent: "center",
+                gap: "10px",
+              }}
+            >
+              <button
+                className="btn btn-secondary"
+                disabled={currentPage === 1}
+                onClick={() => {
+                  fetchTools(currentPage - 1, search);
                 }}
               >
+                Previous
+              </button>
 
-                <button
-                  className="btn btn-secondary"
-                  disabled={currentPage === 1}
-                  onClick={() => {
-                    fetchTools(currentPage - 1, search);
-                  }}
-                >
-                  Previous
-                </button>
+              <span
+                style={{
+                  alignSelf: "center",
+                  fontWeight: "600",
+                }}
+              >
+                Page {currentPage} of {totalPages}
+              </span>
 
-                <span
-                  style={{
-                    alignSelf: "center",
-                    fontWeight: "600",
-                  }}
-                >
-                  Page {currentPage} of {totalPages}
-                </span>
-
-                <button
-                  className="btn btn-secondary"
-                  disabled={
-                    currentPage === totalPages
-                  }
-                  onClick={() => {
-                    fetchTools(currentPage + 1, search);
-                  }}
-                >
-                  Next
-                </button>
-
-              </div>
-
-            )}
-
-          </div>
-
+              <button
+                className="btn btn-secondary"
+                disabled={currentPage === totalPages}
+                onClick={() => {
+                  fetchTools(currentPage + 1, search);
+                }}
+              >
+                Next
+              </button>
+            </div>
+          )}
+        </div>
       )}
 
       <ConfirmationModal
-  isOpen={showDeleteModal}
-  title="Delete Tool"
-  message="Are you sure you want to delete this tool? This action cannot be undone."
-  onConfirm={confirmDeleteTool}
-  onCancel={() => {
-    setShowDeleteModal(false);
-    setSelectedToolId(null);
-  }}
-/>
-
+        isOpen={showDeleteModal}
+        title="Delete Tool"
+        message="Are you sure you want to delete this tool? This action cannot be undone."
+        onConfirm={confirmDeleteTool}
+        onCancel={() => {
+          setShowDeleteModal(false);
+          setSelectedToolId(null);
+        }}
+      />
     </MainLayout>
   );
 };

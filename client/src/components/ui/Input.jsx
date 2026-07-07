@@ -1,5 +1,3 @@
-
-
 const Input = ({
   id,
   label,
@@ -12,10 +10,7 @@ const Input = ({
 }) => {
   return (
     <div className="form-group">
-      <label
-        htmlFor={id}
-        className="form-label"
-      >
+      <label htmlFor={id} className="form-label">
         {label}
       </label>
 
@@ -26,17 +21,11 @@ const Input = ({
         disabled={disabled}
         aria-label={label}
         aria-invalid={!!error}
-        className={`form-input ${
-          error ? "form-input-error" : ""
-        }`}
+        className={`form-input ${error ? "form-input-error" : ""}`}
         {...register(id, validation)}
       />
 
-      {error && (
-        <p className="form-error">
-          {error.message}
-        </p>
-      )}
+      {error && <p className="form-error">{error.message}</p>}
     </div>
   );
 };

@@ -14,7 +14,6 @@ const Navbar = () => {
 
   return (
     <header className="navbar">
-
       <div
         className="navbar-brand"
         style={{ cursor: "pointer" }}
@@ -31,7 +30,6 @@ const Navbar = () => {
           gap: "14px",
         }}
       >
-
         <button
           className="btn btn-secondary"
           onClick={() => navigate("/dashboard")}
@@ -54,29 +52,18 @@ const Navbar = () => {
             Register Staff
           </button>
         )}
-
       </nav>
 
       <div className="navbar-user">
-
         <div className="user-info">
           <h4>{user?.fullName}</h4>
-          <p>
-            {user?.role === "admin"
-              ? "Administrator"
-              : "Staff"}
-          </p>
+          <p>{user?.role === "admin" ? "Administrator" : "Staff"}</p>
         </div>
 
-        <button
-          className="btn btn-primary"
-          onClick={handleLogout}
-        >
+        <button className="btn btn-primary" onClick={handleLogout}>
           Logout
         </button>
-
       </div>
-
     </header>
   );
 };

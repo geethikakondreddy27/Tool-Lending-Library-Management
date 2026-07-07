@@ -11,18 +11,9 @@ const categories = [
   "Other",
 ];
 
-const conditions = [
-  "Excellent",
-  "Good",
-  "Fair",
-  "Poor",
-];
+const conditions = ["Excellent", "Good", "Fair", "Poor"];
 
-const statuses = [
-  "Available",
-  "Unavailable",
-  "Maintenance",
-];
+const statuses = ["Available", "Unavailable", "Maintenance"];
 
 const defaultValues = {
   name: "",
@@ -70,34 +61,25 @@ const ToolForm = ({
     const validationErrors = {};
 
     if (formData.name.trim().length < 2) {
-      validationErrors.name =
-        "Tool name must contain at least 2 characters.";
+      validationErrors.name = "Tool name must contain at least 2 characters.";
     }
 
     if (!formData.category) {
       validationErrors.category = "Category is required.";
     }
 
-    if (
-      formData.totalQuantity === "" ||
-      Number(formData.totalQuantity) < 0
-    ) {
-      validationErrors.totalQuantity =
-        "Enter a valid total quantity.";
+    if (formData.totalQuantity === "" || Number(formData.totalQuantity) < 0) {
+      validationErrors.totalQuantity = "Enter a valid total quantity.";
     }
 
     if (
       formData.availableQuantity === "" ||
       Number(formData.availableQuantity) < 0
     ) {
-      validationErrors.availableQuantity =
-        "Enter a valid available quantity.";
+      validationErrors.availableQuantity = "Enter a valid available quantity.";
     }
 
-    if (
-      Number(formData.availableQuantity) >
-      Number(formData.totalQuantity)
-    ) {
+    if (Number(formData.availableQuantity) > Number(formData.totalQuantity)) {
       validationErrors.availableQuantity =
         "Available quantity cannot exceed total quantity.";
     }
@@ -129,9 +111,7 @@ const ToolForm = ({
         onChange={handleChange}
       />
 
-      {errors.name && (
-        <small className="error-text">{errors.name}</small>
-      )}
+      {errors.name && <small className="error-text">{errors.name}</small>}
 
       <select
         className="form-input"
@@ -149,9 +129,7 @@ const ToolForm = ({
       </select>
 
       {errors.category && (
-        <small className="error-text">
-          {errors.category}
-        </small>
+        <small className="error-text">{errors.category}</small>
       )}
 
       <textarea
@@ -173,9 +151,7 @@ const ToolForm = ({
       />
 
       {errors.totalQuantity && (
-        <small className="error-text">
-          {errors.totalQuantity}
-        </small>
+        <small className="error-text">{errors.totalQuantity}</small>
       )}
 
       <input
@@ -188,9 +164,7 @@ const ToolForm = ({
       />
 
       {errors.availableQuantity && (
-        <small className="error-text">
-          {errors.availableQuantity}
-        </small>
+        <small className="error-text">{errors.availableQuantity}</small>
       )}
 
       <select
@@ -234,26 +208,15 @@ const ToolForm = ({
           marginTop: "10px",
         }}
       >
-        <button
-          className="btn btn-primary"
-          disabled={loading}
-        >
-          {loading
-            ? "Saving..."
-            : isEdit
-            ? "Update Tool"
-            : "Add Tool"}
+        <button className="btn btn-primary" disabled={loading}>
+          {loading ? "Saving..." : isEdit ? "Update Tool" : "Add Tool"}
         </button>
 
-        <button
-          type="button"
-          className="btn btn-secondary"
-          onClick={onCancel}
-        >
+        <button type="button" className="btn btn-secondary" onClick={onCancel}>
           Cancel
         </button>
       </div>
     </form>
   );
-}
+};
 export default ToolForm;

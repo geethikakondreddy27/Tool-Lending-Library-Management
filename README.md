@@ -216,6 +216,3 @@ The application follows a standard three-tier architecture.
 
 ---
 
-# Author 
-- Kondreddy Geethika 
-- 

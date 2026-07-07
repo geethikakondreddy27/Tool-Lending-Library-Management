@@ -1,9 +1,6 @@
 const asyncHandler = require("../middlewares/asyncHandler");
 
-const {
-  registerUser,
-  loginUser,
-} = require("../services/authService");
+const { registerUser, loginUser } = require("../services/authService");
 
 /**
  * @desc Register a new user

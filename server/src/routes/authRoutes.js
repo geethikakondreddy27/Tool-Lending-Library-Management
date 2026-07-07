@@ -1,9 +1,6 @@
 const express = require("express");
 
-const {
-  register,
-  login,
-} = require("../controllers/authController");
+const { register, login } = require("../controllers/authController");
 
 const {
   validateRegister,
@@ -25,14 +22,10 @@ router.post(
   protect,
   authorize("admin"),
   validateRegister,
-  register
+  register,
 );
 
 // Login User
-router.post(
-  "/login",
-  validateLogin,
-  login
-);
+router.post("/login", validateLogin, login);
 
 module.exports = router;

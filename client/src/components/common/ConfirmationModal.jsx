@@ -1,38 +1,22 @@
-const ConfirmationModal = ({
-  isOpen,
-  title,
-  message,
-  onConfirm,
-  onCancel,
-}) => {
+const ConfirmationModal = ({ isOpen, title, message, onConfirm, onCancel }) => {
   if (!isOpen) return null;
 
   return (
     <div className="modal-overlay">
       <div className="confirmation-modal">
-
         <h3>{title}</h3>
 
         <p>{message}</p>
 
         <div className="modal-actions">
-
-          <button
-            className="btn btn-danger"
-            onClick={onConfirm}
-          >
+          <button className="btn btn-danger" onClick={onConfirm}>
             Delete
           </button>
 
-          <button
-            className="btn btn-secondary"
-            onClick={onCancel}
-          >
+          <button className="btn btn-secondary" onClick={onCancel}>
             Cancel
           </button>
-
         </div>
-
       </div>
     </div>
   );

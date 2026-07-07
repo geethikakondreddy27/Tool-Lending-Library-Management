@@ -18,10 +18,7 @@ const generateToolCode = async () => {
     return "TL-0001";
   }
 
-  const latestNumber = parseInt(
-    latestTool.toolCode.split("-")[1],
-    10
-  );
+  const latestNumber = parseInt(latestTool.toolCode.split("-")[1], 10);
 
   const nextNumber = latestNumber + 1;
 
@@ -50,10 +47,7 @@ const createTool = async (toolData, userId) => {
   });
 
   if (existingTool) {
-    throw new AppError(
-      "A tool with this name already exists.",
-      409
-    );
+    throw new AppError("A tool with this name already exists.", 409);
   }
 
   const toolCode = await generateToolCode();
@@ -81,13 +75,7 @@ const createTool = async (toolData, userId) => {
  * Get All Tools
  */
 const getAllTools = async (queryParams) => {
-  const {
-    page = 1,
-    limit = 10,
-    search = "",
-    category,
-    status,
-  } = queryParams;
+  const { page = 1, limit = 10, search = "", category, status } = queryParams;
 
   const query = {
     isActive: true,
@@ -95,21 +83,21 @@ const getAllTools = async (queryParams) => {
 
   // Search by Tool Name
   if (search.trim()) {
-  query.$or = [
-    {
-      name: {
-        $regex: search.trim(),
-        $options: "i",
+    query.$or = [
+      {
+        name: {
+          $regex: search.trim(),
+          $options: "i",
+        },
       },
-    },
-    {
-      category: {
-        $regex: search.trim(),
-        $options: "i",
+      {
+        category: {
+          $regex: search.trim(),
+          $options: "i",
+        },
       },
-    },
-  ];
-}
+    ];
+  }
 
   // Filter by Category
   if (category) {
@@ -133,16 +121,13 @@ const getAllTools = async (queryParams) => {
     .skip((currentPage - 1) * pageLimit)
     .limit(pageLimit);
 
- return {
-  totalTools,
-  currentPage,
-  totalPages: Math.max(
-    1,
-    Math.ceil(totalTools / pageLimit)
-  ),
-  pageSize: pageLimit,
-  tools,
-};
+  return {
+    totalTools,
+    currentPage,
+    totalPages: Math.max(1, Math.ceil(totalTools / pageLimit)),
+    pageSize: pageLimit,
+    tools,
+  };
 };
 
 /**
@@ -188,26 +173,19 @@ const updateTool = async (toolId, toolData, userId) => {
     });
 
     if (existingTool) {
-      throw new AppError(
-        "A tool with this name already exists.",
-        409
-      );
+      throw new AppError("A tool with this name already exists.", 409);
     }
   }
 
-  
   // Apply updates
-Object.assign(tool, toolData);
+  Object.assign(tool, toolData);
 
-// Validate final quantities after update
-if (tool.availableQuantity > tool.totalQuantity) {
-  throw new AppError(
-    "Available quantity cannot exceed total quantity.",
-    400
-  );
-}
+  // Validate final quantities after update
+  if (tool.availableQuantity > tool.totalQuantity) {
+    throw new AppError("Available quantity cannot exceed total quantity.", 400);
+  }
 
-tool.updatedBy = userId;
+  tool.updatedBy = userId;
 
   await tool.save();
 

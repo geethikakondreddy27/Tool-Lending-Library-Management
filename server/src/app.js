@@ -44,7 +44,7 @@ app.use(
       return callback(new Error("CORS policy does not allow this origin."));
     },
     credentials: true,
-  })
+  }),
 );
 
 /**

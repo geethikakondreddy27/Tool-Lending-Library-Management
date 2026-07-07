@@ -11,18 +11,9 @@ const allowedCategories = [
   "Other",
 ];
 
-const allowedConditions = [
-  "Excellent",
-  "Good",
-  "Fair",
-  "Poor",
-];
+const allowedConditions = ["Excellent", "Good", "Fair", "Poor"];
 
-const allowedStatuses = [
-  "Available",
-  "Unavailable",
-  "Maintenance",
-];
+const allowedStatuses = ["Available", "Unavailable", "Maintenance"];
 
 /**
  * Validate Create Tool
@@ -57,10 +48,7 @@ const validateCreateTool = (req, res, next) => {
     errors.description = "Description cannot exceed 500 characters.";
   }
 
-  if (
-    totalQuantity === undefined ||
-    Number.isNaN(Number(totalQuantity))
-  ) {
+  if (totalQuantity === undefined || Number.isNaN(Number(totalQuantity))) {
     errors.totalQuantity = "Total quantity is required.";
   } else if (Number(totalQuantity) < 0) {
     errors.totalQuantity = "Total quantity cannot be negative.";
@@ -70,35 +58,24 @@ const validateCreateTool = (req, res, next) => {
     availableQuantity === undefined ||
     Number.isNaN(Number(availableQuantity))
   ) {
-    errors.availableQuantity =
-      "Available quantity is required.";
+    errors.availableQuantity = "Available quantity is required.";
   } else if (Number(availableQuantity) < 0) {
-    errors.availableQuantity =
-      "Available quantity cannot be negative.";
-  } else if (
-    Number(availableQuantity) > Number(totalQuantity)
-  ) {
+    errors.availableQuantity = "Available quantity cannot be negative.";
+  } else if (Number(availableQuantity) > Number(totalQuantity)) {
     errors.availableQuantity =
       "Available quantity cannot exceed total quantity.";
   }
 
-  if (
-    condition &&
-    !allowedConditions.includes(condition)
-  ) {
+  if (condition && !allowedConditions.includes(condition)) {
     errors.condition = "Invalid tool condition.";
   }
 
-  if (
-    status &&
-    !allowedStatuses.includes(status)
-  ) {
+  if (status && !allowedStatuses.includes(status)) {
     errors.status = "Invalid tool status.";
   }
 
   if (location && location.length > 100) {
-    errors.location =
-      "Location cannot exceed 100 characters.";
+    errors.location = "Location cannot exceed 100 characters.";
   }
 
   if (Object.keys(errors).length > 0) {
@@ -128,67 +105,44 @@ const validateUpdateTool = (req, res, next) => {
 
   if (name !== undefined) {
     if (name.trim().length < 2) {
-      errors.name =
-        "Tool name must contain at least 2 characters.";
+      errors.name = "Tool name must contain at least 2 characters.";
     } else if (name.trim().length > 100) {
-      errors.name =
-        "Tool name cannot exceed 100 characters.";
+      errors.name = "Tool name cannot exceed 100 characters.";
     }
   }
 
-  if (
-    category !== undefined &&
-    !allowedCategories.includes(category)
-  ) {
+  if (category !== undefined && !allowedCategories.includes(category)) {
     errors.category = "Invalid category selected.";
   }
 
-  if (
-    description !== undefined &&
-    description.length > 500
-  ) {
-    errors.description =
-      "Description cannot exceed 500 characters.";
+  if (description !== undefined && description.length > 500) {
+    errors.description = "Description cannot exceed 500 characters.";
   }
 
   if (
     totalQuantity !== undefined &&
-    (Number.isNaN(Number(totalQuantity)) ||
-      Number(totalQuantity) < 0)
+    (Number.isNaN(Number(totalQuantity)) || Number(totalQuantity) < 0)
   ) {
-    errors.totalQuantity =
-      "Total quantity cannot be negative.";
+    errors.totalQuantity = "Total quantity cannot be negative.";
   }
 
   if (
     availableQuantity !== undefined &&
-    (Number.isNaN(Number(availableQuantity)) ||
-      Number(availableQuantity) < 0)
+    (Number.isNaN(Number(availableQuantity)) || Number(availableQuantity) < 0)
   ) {
-    errors.availableQuantity =
-      "Available quantity cannot be negative.";
+    errors.availableQuantity = "Available quantity cannot be negative.";
   }
 
-  if (
-    condition !== undefined &&
-    !allowedConditions.includes(condition)
-  ) {
+  if (condition !== undefined && !allowedConditions.includes(condition)) {
     errors.condition = "Invalid tool condition.";
   }
 
-  if (
-    status !== undefined &&
-    !allowedStatuses.includes(status)
-  ) {
+  if (status !== undefined && !allowedStatuses.includes(status)) {
     errors.status = "Invalid tool status.";
   }
 
-  if (
-    location !== undefined &&
-    location.length > 100
-  ) {
-    errors.location =
-      "Location cannot exceed 100 characters.";
+  if (location !== undefined && location.length > 100) {
+    errors.location = "Location cannot exceed 100 characters.";
   }
 
   if (Object.keys(errors).length > 0) {

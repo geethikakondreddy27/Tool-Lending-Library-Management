@@ -59,11 +59,7 @@ const getOne = asyncHandler(async (req, res) => {
  * @access Admin
  */
 const update = asyncHandler(async (req, res) => {
-  const tool = await updateTool(
-    req.params.id,
-    req.body,
-    req.user._id
-  );
+  const tool = await updateTool(req.params.id, req.body, req.user._id);
 
   res.status(200).json({
     success: true,
@@ -78,10 +74,7 @@ const update = asyncHandler(async (req, res) => {
  * @access Admin
  */
 const remove = asyncHandler(async (req, res) => {
-  const result = await deleteTool(
-    req.params.id,
-    req.user._id
-  );
+  const result = await deleteTool(req.params.id, req.user._id);
 
   res.status(200).json({
     success: true,

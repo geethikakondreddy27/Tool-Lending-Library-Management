@@ -6,9 +6,7 @@ const MainLayout = ({ children }) => {
     <div className="app-layout">
       <Navbar />
 
-      <main className="main-content">
-        {children}
-      </main>
+      <main className="main-content">{children}</main>
     </div>
   );
 };

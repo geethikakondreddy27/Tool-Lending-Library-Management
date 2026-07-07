@@ -1,9 +1,6 @@
 import api from "./api";
 
-export const getTools = async (
-  page = 1,
-  search = ""
-) => {
+export const getTools = async (page = 1, search = "") => {
   const response = await api.get("/tools", {
     params: {
       page,
@@ -15,30 +12,19 @@ export const getTools = async (
 };
 
 export const createTool = async (toolData) => {
-  const response = await api.post(
-    "/tools",
-    toolData
-  );
+  const response = await api.post("/tools", toolData);
 
   return response.data;
 };
 
-export const updateTool = async (
-  toolId,
-  toolData
-) => {
-  const response = await api.put(
-    `/tools/${toolId}`,
-    toolData
-  );
+export const updateTool = async (toolId, toolData) => {
+  const response = await api.put(`/tools/${toolId}`, toolData);
 
   return response.data;
 };
 
 export const deleteTool = async (toolId) => {
-  const response = await api.delete(
-    `/tools/${toolId}`
-  );
+  const response = await api.delete(`/tools/${toolId}`);
 
   return response.data;
 };

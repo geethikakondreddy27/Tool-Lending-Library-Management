@@ -59,22 +59,13 @@ const toolSchema = new mongoose.Schema(
 
     condition: {
       type: String,
-      enum: [
-        "Excellent",
-        "Good",
-        "Fair",
-        "Poor",
-      ],
+      enum: ["Excellent", "Good", "Fair", "Poor"],
       default: "Good",
     },
 
     status: {
       type: String,
-      enum: [
-        "Available",
-        "Unavailable",
-        "Maintenance",
-      ],
+      enum: ["Available", "Unavailable", "Maintenance"],
       default: "Available",
     },
 
@@ -104,7 +95,7 @@ const toolSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 module.exports = mongoose.model("Tool", toolSchema);

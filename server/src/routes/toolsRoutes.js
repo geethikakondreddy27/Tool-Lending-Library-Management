@@ -25,45 +25,18 @@ const router = express.Router();
  */
 
 // Create Tool (Admin Only)
-router.post(
-  "/",
-  protect,
-  authorize("admin"),
-  validateCreateTool,
-  create
-);
+router.post("/", protect, authorize("admin"), validateCreateTool, create);
 
 // Get All Tools (Admin & Staff)
-router.get(
-  "/",
-  protect,
-  authorize("admin", "staff"),
-  getAll
-);
+router.get("/", protect, authorize("admin", "staff"), getAll);
 
 // Get Single Tool (Admin & Staff)
-router.get(
-  "/:id",
-  protect,
-  authorize("admin", "staff"),
-  getOne
-);
+router.get("/:id", protect, authorize("admin", "staff"), getOne);
 
 // Update Tool (Admin Only)
-router.put(
-  "/:id",
-  protect,
-  authorize("admin"),
-  validateUpdateTool,
-  update
-);
+router.put("/:id", protect, authorize("admin"), validateUpdateTool, update);
 
 // Delete Tool (Admin Only)
-router.delete(
-  "/:id",
-  protect,
-  authorize("admin"),
-  remove
-);
+router.delete("/:id", protect, authorize("admin"), remove);
 
 module.exports = router;

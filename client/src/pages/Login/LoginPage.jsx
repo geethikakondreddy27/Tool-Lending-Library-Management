@@ -31,10 +31,7 @@ const LoginPage = () => {
 
       const response = await loginUser(formData);
 
-      login(
-        response.data.user,
-        response.data.token
-      );
+      login(response.data.user, response.data.token);
 
       console.log("[Telemetry] Login successful");
 
@@ -46,10 +43,7 @@ const LoginPage = () => {
     } catch (error) {
       console.error(error);
 
-      setServerError(
-        error.response?.data?.message ||
-          "Unable to login."
-      );
+      setServerError(error.response?.data?.message || "Unable to login.");
     } finally {
       setLoading(false);
     }
@@ -57,30 +51,16 @@ const LoginPage = () => {
 
   return (
     <main className="login-page">
-
       <Card>
-
         <div className="login-header">
-
           <h1>Tool Lending Library</h1>
 
-          <p>
-            Inventory Management System
-          </p>
-
+          <p>Inventory Management System</p>
         </div>
 
-        {serverError && (
-          <div className="login-error">
-            {serverError}
-          </div>
-        )}
+        {serverError && <div className="login-error">{serverError}</div>}
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          noValidate
-        >
-
+        <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <Input
             id="email"
             label="Email Address"
@@ -90,10 +70,8 @@ const LoginPage = () => {
             validation={{
               required: "Email is required",
               pattern: {
-                value:
-                  /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message:
-                  "Enter a valid email address",
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Enter a valid email address",
               },
             }}
             error={errors.email}
@@ -106,30 +84,20 @@ const LoginPage = () => {
             placeholder="Enter your password"
             register={register}
             validation={{
-              required:
-                "Password is required",
+              required: "Password is required",
             }}
             error={errors.password}
           />
 
-          <Button
-            type="submit"
-            disabled={loading}
-          >
-            {loading
-              ? "Signing In..."
-              : "Login"}
+          <Button type="submit" disabled={loading}>
+            {loading ? "Signing In..." : "Login"}
           </Button>
-
         </form>
 
         <p className="login-footer">
-          Accounts are managed by the
-          system administrator.
+          Accounts are managed by the system administrator.
         </p>
-
       </Card>
-
     </main>
   );
 };
